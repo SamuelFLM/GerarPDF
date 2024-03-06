@@ -3,10 +3,10 @@ import pdfkit
 import base64
 import os
 
-wkhtmltopdf_path = r"wkhtmltopdf\bin\wkhtmltopdf.exe"
+# wkhtmltopdf_path = r".venv\Lib\site-packages\wkhtmltopdf\bin\wkhtmltopdf.exe"
 
-# Configure o pdfkit para usar o binário
-config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+# # Configure o pdfkit para usar o binário
+# config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
 
 
 st.header("Página da web para gerar :red[PDF]")
@@ -27,7 +27,7 @@ btn_limpar = col2.button("Limpar", use_container_width=True, type='primary')
 if btn:
     try:
         with st.spinner("Gerando PDF..."):
-            pdfkit.from_url(url, f"{nome_arquivo}.pdf", verbose=True, configuration=config)
+            pdfkit.from_url(url, f"{nome_arquivo}.pdf", verbose=True)
         with open(f"{nome_arquivo}.pdf", "rb") as f:
                 bytes = f.read()
                 b64 = base64.b64encode(bytes).decode()
