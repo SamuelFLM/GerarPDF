@@ -6,8 +6,6 @@ import os
 
 st.set_page_config("Gerador De PDF", page_icon="logo.png")
 
-st.sidebar.markdown("Desenvolvido por Samuel Felipe")
-
 st.header("Página da web para gerar :red[PDF]")
 st.caption("Converter uma página Web através da URL para PDF")
 st.caption("✅Gratuito ✅Online ✅Sem limites")
@@ -47,4 +45,8 @@ st.subheader("Perguntas Frequentes", divider=True)
 
 with st.expander("É possível gerar PDF de todos os sites?"):
     st.markdown("Não necessariamente. Alguns sites possuem políticas de segurança rigorosas que podem resultar em um PDF gerado de maneira inadequada ou estranha.")
+    
+with st.expander("Quem desenvolveu?"):
+    st.markdown("Desenvolvedor Full Stack - Samuel Felipe")
+    st.markdown("[Linkedin](https://www.linkedin.com/in/samuelflima/)")
 
