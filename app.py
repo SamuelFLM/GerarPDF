@@ -24,16 +24,16 @@ btn_limpar = col2.button("Limpar", use_container_width=True, type='primary')
 if btn:
     try:
         with st.spinner("Gerando PDF..."):
-            pdfkit.from_url(url, f"{nome_arquivo}.pdf")
-        with open(f"{nome_arquivo}.pdf", "rb") as f:
+            pdfkit.from_url(url, "01.pdf", verbose=True)
+        with open("01.pdf", "rb") as f:
                 bytes = f.read()
                 b64 = base64.b64encode(bytes).decode()
-                href = f'<a href="data:file/pdf;base64,{b64}" download=\'{nome_arquivo}.pdf\' style="display: inline-block; padding: 10px 20px; color: #fff; background-color: #007bff; border-radius: 5px; text-decoration: none;">Clique aqui para baixar o PDF</a>'
+                href = f'<a href="data:file/pdf;base64,{b64}" download=\'gerarpdf.pdf\' style="display: inline-block; padding: 10px 20px; color: #fff; background-color: #007bff; border-radius: 5px; text-decoration: none;">Clique aqui para baixar o PDF</a>'
                 st.markdown(href, unsafe_allow_html=True)
     except(OSError):
         st.error("😕 Parece que seu link não aceita a geração do PDF")
-    if os.path.exists(f"{nome_arquivo}.pdf"):
-        os.remove(f"{nome_arquivo}.pdf")  # Remove o arquivo após o download
+    # if os.path.exists("01.pdf"):
+    #     os.remove("01.pdf")  # Remove o arquivo após o download
     
         
 elif btn_limpar:
