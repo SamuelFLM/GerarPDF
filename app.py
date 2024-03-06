@@ -2,13 +2,12 @@ import streamlit as st
 import pdfkit
 import base64
 import os
+import imgkit
 
-# wkhtmltopdf_path = r".venv\Lib\site-packages\wkhtmltopdf\bin\wkhtmltopdf.exe"
+path_wkthmltoimage = r".venv\Lib\site-packages\wkhtmltopdf\bin\wkhtmltoimage.exe"
+config = imgkit.config(wkhtmltoimage=path_wkthmltoimage)
 
-# # Configure o pdfkit para usar o binário
-# config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
-
-
+st.set_page_config("Gerador PDF", page_icon='img/logo.png')
 st.header("Página da web para gerar :red[PDF]")
 st.caption("Converter uma página Web através da URL para PDF")
 st.caption("✅Gratuito ✅Online ✅Sem limites")
@@ -27,16 +26,16 @@ btn_limpar = col2.button("Limpar", use_container_width=True, type='primary')
 if btn:
     try:
         with st.spinner("Gerando PDF..."):
-            pdfkit.from_url(url, f"{nome_arquivo}.pdf", verbose=True)
-        with open(f"{nome_arquivo}.pdf", "rb") as f:
+            imgkit.from_url(url, f"{nome_arquivo}.jpg", config=config)
+        with open(f"{nome_arquivo}.jpg", "rb") as f:
                 bytes = f.read()
                 b64 = base64.b64encode(bytes).decode()
-                href = f'<a href="data:file/pdf;base64,{b64}" download=\'{nome_arquivo}.pdf\' style="display: inline-block; padding: 10px 20px; color: #fff; background-color: #007bff; border-radius: 5px; text-decoration: none;">Clique aqui para baixar o PDF</a>'
+                href = f'<a href="data:file/jpg;base64,{b64}" download=\'{nome_arquivo}.jpg\' style="display: inline-block; padding: 10px 20px; color: #fff; background-color: #007bff; border-radius: 5px; text-decoration: none;">Clique aqui para baixar o jpg</a>'
                 st.markdown(href, unsafe_allow_html=True)
     except:
-        st.error("😕 Parece que seu link não aceita a geração do PDF")
-    if os.path.exists(f"{nome_arquivo}.pdf"):
-        os.remove(f"{nome_arquivo}.pdf")  # Remove o arquivo após o download
+        st.error("😕 Parece que seu link não aceita a geração do jpg")
+    if os.path.exists(f"{nome_arquivo}.jpg"):
+        os.remove(f"{nome_arquivo}.jpg")  # Remove o arquivo após o download
     
         
 elif btn_limpar:
